@@ -1,0 +1,31 @@
+body{
+    background-color: #D6E3D6;
+    font-family: docktrin;
+}
+
+#highScore{
+    width: 420px;
+    height: 50px;
+    background-color: #93B493;
+    text-align: center;
+}
+
+#Scene{
+    width: 420px;
+    height: 465px;
+    background-color: #5B845B;
+}
+
+#nbLife{
+    width: 420px;
+    height: 20px;
+    background-color: #2B3E1E;
+}
+
+.sameThings{
+    margin: auto;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border: solid black;
+    border-radius: 0.5em;
+}
