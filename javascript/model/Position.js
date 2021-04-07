@@ -4,7 +4,7 @@
 class Position {
 
     /**
-     * 
+     * To be created, a Position we need row and column
      * @param {number} row index of the row
      * @param {number} column index of the column
      */
