@@ -1,5 +1,3 @@
-let tab;
-
 /**
  * The layers each group together a set of tiles in order to deconstruct a level. 
  */
@@ -9,12 +7,14 @@ class Layer {
      * To be created, a layer we just need a nbRows and nbColumns
      * @param {number} nbRows 
      * @param {number} nbColumns 
+     * @param {Tile} tab 
      */
-    constructor(nbRows, nbColumns) {
+    constructor(nbRows, nbColumns,tab) {
         this._nbRows = nbRows;
         this._nbColumns = nbColumns;
-
+        
         tab = Array(nbRows).fill().map(() => Array(nbColumns));
+        this._tab = tab;
     }
 
     /**
@@ -26,6 +26,11 @@ class Layer {
      * @return {number}
      */
     get nbColumns() { return this._nbColumns }
+
+    /**
+     * @return {Tile}
+     */
+    get tab() { return this._tab }
 
 
     /**
@@ -42,7 +47,7 @@ class Layer {
      * @param {Position} pos 
      */
     setTile(pos, tile) {
-        tab[pos.row][pos.column] = tile;
+        this._tab[pos.row][pos.column] = tile;
     }
 
     /**
@@ -51,7 +56,7 @@ class Layer {
      * @return {Tile}
      */
     getTile(pos) {
-        return tab[pos.row][pos.column];
+        return this._tab[pos.row][pos.column];
     }
 
     /**
@@ -59,7 +64,7 @@ class Layer {
      * @param {Position} pos 
      */
     hasTile(pos) {
-        return tab[pos.row][pos.column] != null;
+        return this._tab[pos.row][pos.column] != null;
     }
 
 }
