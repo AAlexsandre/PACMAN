@@ -1,5 +1,5 @@
 /**
- * A position of the game components for the moment the tiles
+ * A position of the game components
  */
 class Position {
 

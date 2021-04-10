@@ -39,12 +39,21 @@ class Maze {
 
     }
 
+    /**
+     * this function checks if the position is in the array range and then returns the "wall" tile at the given position 
+     * @param {Position} pos row + column
+     */
     getWallLayerTile(pos){
         if (this._layerWall.contains(pos)){
             return this._layerWall.getTile(pos);
         }
         
     }
+
+    /**
+     * this function checks if the position is in the array range and then returns the "dot" tile at the given position 
+     * @param {Position} pos row + column
+     */
     getDotLayerTile(pos){
         if (this._layerDot.contains(pos)){
             return this._layerDot.getTile(pos);
