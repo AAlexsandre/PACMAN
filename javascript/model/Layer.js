@@ -7,14 +7,11 @@ class Layer {
      * To be created, a layer we just need a nbRows and nbColumns
      * @param {number} nbRows 
      * @param {number} nbColumns 
-     * @param {Tile} tab 
      */
-    constructor(nbRows, nbColumns,tab) {
+    constructor(nbRows, nbColumns) {
         this._nbRows = nbRows;
         this._nbColumns = nbColumns;
-        
-        tab = Array(nbRows).fill().map(() => Array(nbColumns));
-        this._tab = tab;
+        this._tab = Array(nbRows).fill().map(() => Array(nbColumns));
     }
 
     /**
@@ -28,23 +25,23 @@ class Layer {
     get nbColumns() { return this._nbColumns }
 
     /**
-     * @return {Tile}
+     * @return {Array}
      */
     get tab() { return this._tab }
 
 
     /**
      * This function check if the position are in the range of array
-     * @param {Position} pos 
+     * @param {Position} pos Position
      * @return {Boolean}
      */
     contains(pos) {
-        return (pos.row > 0 && pos.row < this.nbRows) && (pos.column > 0 && pos.column < this.nbColumns);
+        return (pos.row >= 0 && pos.row < this.nbRows) && (pos.column >= 0 && pos.column < this.nbColumns);
     }
 
     /**
      * This function put a tile in the position of array
-     * @param {Position} pos 
+     * @param {Position} pos Position
      */
     setTile(pos, tile) {
         this._tab[pos.row][pos.column] = tile;
@@ -52,7 +49,7 @@ class Layer {
 
     /**
      * This function return a tile of one position from array
-     * @param {Position} pos 
+     * @param {Position} pos Position
      * @return {Tile}
      */
     getTile(pos) {
@@ -61,7 +58,7 @@ class Layer {
 
     /**
      * This function check if the tile are in the position from array
-     * @param {Position} pos 
+     * @param {Position} pos Position
      */
     hasTile(pos) {
         return this._tab[pos.row][pos.column] != null;

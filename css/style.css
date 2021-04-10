@@ -34,6 +34,7 @@ main{
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     border: solid #5B845B;
+    border-radius: 5px;
 }
 
 .wall{
