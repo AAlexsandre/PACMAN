@@ -25,12 +25,12 @@ class Maze {
                 }
 
                 if (RAW_MAZE.table[i][j] == 2) {
-                    this._layerDot.setTile(new Position(i, j), new Wall("d" + dotId));
+                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId));
                     dotId++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 3) {
-                    this._layerDot.setTile(new Position(i, j), new Wall("d" + dotId));
+                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId));
                     dotId++;
                 }
             }
