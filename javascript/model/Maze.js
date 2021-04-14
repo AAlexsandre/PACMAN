@@ -4,7 +4,7 @@
 class Maze {
 
     /**
-     * 
+     * To created a maze weed need, rawMaze and two layers
      * @param {Array} rawMaze 
      */
     constructor(rawMaze) {

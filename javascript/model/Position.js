@@ -22,4 +22,26 @@ class Position {
      * @return {number}
      */
     get column() { return this._column; }
+
+    /**
+     * this function return the next position in the given direction
+     * @param {Direction} dir 
+     * @return {Position}
+     */
+    nextPosition(dir) {
+        switch (dir) {
+            case Direction.NORTH:
+                return new Position(this.row - 1, this.column);
+
+            case Direction.SOUTH:
+                return new Position(this.row + 1, this.column);
+
+            case Direction.EAST:
+                return new Position(this.row, this.column + 1);
+
+            case Direction.WEST:
+                return new Position(this.row, this.column - 1);
+        }
+
+    }
 }
