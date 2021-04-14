@@ -29,10 +29,11 @@ class Position {
      * @return {Position}
      */
     nextPosition(dir) {
+
         switch (dir) {
             case Direction.NORTH:
                 return new Position(this.row - 1, this.column);
-
+                
             case Direction.SOUTH:
                 return new Position(this.row + 1, this.column);
 
