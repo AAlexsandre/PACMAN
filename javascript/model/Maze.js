@@ -25,12 +25,12 @@ class Maze {
                 }
 
                 if (RAW_MAZE.table[i][j] == 2) {
-                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId));
+                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId, false));
                     dotId++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 3) {
-                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId));
+                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId, true));
                     dotId++;
                 }
             }
@@ -42,6 +42,7 @@ class Maze {
     /**
      * this function checks if the position is in the array range and then returns the "wall" tile at the given position 
      * @param {Position} pos row + column
+     * @return {Tile}
      */
     getWallLayerTile(pos){
         if (this._layerWall.contains(pos)){
@@ -53,6 +54,7 @@ class Maze {
     /**
      * this function checks if the position is in the array range and then returns the "dot" tile at the given position 
      * @param {Position} pos row + column
+     * @return {Tile}
      */
     getDotLayerTile(pos){
         if (this._layerDot.contains(pos)){

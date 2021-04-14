@@ -22,8 +22,14 @@ class GameView {
                 }
 
 
-                if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot("d" + count3))) {
+                if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot("d" + count3, false))) {
                     $("#scene").append("<span id=tile" + count + " class=eraser>©</span>");
+                    modifsElements(i, j, count);
+                    count3++;
+                }
+
+                if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot("d" + count3, true))) {
+                    $("#scene").append("<span id=tile" + count + " class=eraser>♥</span>");
                     modifsElements(i, j, count);
                     count3++;
                 }

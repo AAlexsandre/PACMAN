@@ -59,6 +59,7 @@ class Layer {
     /**
      * This function check if the tile are in the position from array
      * @param {Position} pos Position
+     * @return {Boolean}
      */
     hasTile(pos) {
         return this._tab[pos.row][pos.column] != null;
