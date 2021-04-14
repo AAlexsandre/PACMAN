@@ -13,6 +13,8 @@ class Maze {
         this._layerWall = new Layer(RAW_MAZE.table.length, RAW_MAZE.table[0].length);
         this._layerDot = new Layer(RAW_MAZE.table.length, RAW_MAZE.table[0].length);
 
+        this._pacman;
+
         let wallId = 0;
         let dotId = 0;
 
@@ -33,6 +35,10 @@ class Maze {
                     this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId, true));
                     dotId++;
                 }
+
+                if (RAW_MAZE.table[i][j] == 3) {
+                    this._pacman = new Position(i, j);
+                }
             }
         }
 
@@ -44,11 +50,11 @@ class Maze {
      * @param {Position} pos row + column
      * @return {Tile}
      */
-    getWallLayerTile(pos){
-        if (this._layerWall.contains(pos)){
+    getWallLayerTile(pos) {
+        if (this._layerWall.contains(pos)) {
             return this._layerWall.getTile(pos);
         }
-        
+
     }
 
     /**
@@ -56,8 +62,8 @@ class Maze {
      * @param {Position} pos row + column
      * @return {Tile}
      */
-    getDotLayerTile(pos){
-        if (this._layerDot.contains(pos)){
+    getDotLayerTile(pos) {
+        if (this._layerDot.contains(pos)) {
             return this._layerDot.getTile(pos);
         }
     }
@@ -80,11 +86,56 @@ class Maze {
     /**
      * @return {Array}
      */
-    get layerWall() { return this._layerWall}
-    
+    get layerWall() { return this._layerWall }
+
     /**
      * @return {Array}
      */
-    get layerDot() { return this._layerDot}
+    get layerDot() { return this._layerDot }
+
+    /**
+     * @return {Position}
+     */
+    get pacman(){ return this._pacman}
+
+    /**
+     * This function check if the position is the range of array and it is a wall
+     * @param {Position} position 
+     * @return {Boolean}
+     */
+    canWalkOn(position) {
+        return this.layerWall.contains(position) && !this.layerWall.hasTile(position);
+    }
+
+    /**
+     * This function check if the position is the range of array and it is a dot
+     * @param {Position} position 
+     * @return {Boolean}
+     */
+    canPick(position) {
+        return this.layerDot.contains(position) && this.layerDot.hasTile(position);
+    }
+
+    /**
+     * This function return the dot of the position in the array
+     * @param {Position} position 
+     * @return {Dot}
+     * @throws {string}
+     */
+    pick(position) {
+        try {
+            if (this.canPick(position)) {
+                return this.layerDot.tab[position.row][position.column];
+            }
+
+            throw new Error("In this position he has no food for pacman");
+
+        } catch (error) {
+            console.log(error);
+        }
+
+
+
+    }
 
 }
