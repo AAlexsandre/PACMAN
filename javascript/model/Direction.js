@@ -4,8 +4,8 @@
 class Direction {
     /**
      * To be created, a Direction just need an deltaRow and DeltaColumn
-     * @param {number} deltaRow 
-     * @param {number} deltaColumn 
+     * @param {number} deltaRow number of row 
+     * @param {number} deltaColumn number of column
      */
     constructor(deltaRow, deltaColumn) {
         this._deltaRow = deltaRow;

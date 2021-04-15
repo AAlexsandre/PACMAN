@@ -38,9 +38,13 @@ main{
 }
 
 .wall{
-    color: lightgray;
+    color: lightyellow;
 }
 
 .eraser{
-    color: lightyellow;
+    color: yellow;
+}
+
+.superEraser{
+    color: cyan;
 }

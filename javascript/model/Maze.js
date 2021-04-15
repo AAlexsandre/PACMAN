@@ -118,7 +118,7 @@ class Maze {
 
     /**
      * This function return the dot of the position in the array
-     * @param {Position} position 
+     * @param {Position} position position of array
      * @return {Dot}
      * @throws {string}
      */
