@@ -36,7 +36,7 @@ class Maze {
                     dotId++;
                 }
 
-                if (RAW_MAZE.table[i][j] == 3) {
+                if (RAW_MAZE.table[i][j] == 4) {
                     this._pacman = new Position(i, j);
                 }
             }
@@ -104,7 +104,7 @@ class Maze {
      * @return {Boolean}
      */
     canWalkOn(position) {
-        return this.layerWall.contains(position) && !this.layerWall.hasTile(position);
+        return this._layerWall.contains(position) && !this._layerWall.hasTile(position);
     }
 
     /**
@@ -113,7 +113,7 @@ class Maze {
      * @return {Boolean}
      */
     canPick(position) {
-        return this.layerDot.contains(position) && this.layerDot.hasTile(position);
+        return this._layerDot.contains(position) && this._layerDot.hasTile(position);
     }
 
     /**
@@ -125,7 +125,7 @@ class Maze {
     pick(position) {
         try {
             if (this.canPick(position)) {
-                return this.layerDot.tab[position.row][position.column];
+                return this._layerDot._tab[position._row][position._column];
             }
 
             throw new Error("In this position he has no food for pacman");

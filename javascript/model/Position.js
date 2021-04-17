@@ -32,16 +32,16 @@ class Position {
 
         switch (dir) {
             case Direction.NORTH:
-                return new Position(this.row - 1, this.column);
+                return new Position(this._row - 1, this._column);
                 
             case Direction.SOUTH:
-                return new Position(this.row + 1, this.column);
+                return new Position(this._row + 1, this._column);
 
             case Direction.EAST:
-                return new Position(this.row, this.column + 1);
+                return new Position(this._row, this._column + 1);
 
             case Direction.WEST:
-                return new Position(this.row, this.column - 1);
+                return new Position(this._row, this._column - 1);
         }
 
     }

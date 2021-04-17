@@ -38,13 +38,17 @@ main{
 }
 
 .wall{
-    color: lightyellow;
+    color: darkslategrey;
 }
 
 .eraser{
-    color: yellow;
+    color: lightcyan;
 }
 
 .superEraser{
-    color: cyan;
+    color: darkorange;
+}
+
+#eatDot{
+    color: yellow;
 }

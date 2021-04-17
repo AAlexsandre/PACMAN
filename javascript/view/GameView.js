@@ -16,7 +16,7 @@ class GameView {
 
 
                 if (JSON.stringify(game.rawMaze.layerWall.tab[i][j]) === JSON.stringify(new Wall("w" + count2))) {
-                    $("#scene").append("<span id=tile" + count + " class=wall>▀</span>");
+                    $("#scene").append("<span id=tile" + count + " class=wall>■</span>");
                     modifsElements(i, j, count);
                     count2++;
                 }
@@ -29,16 +29,18 @@ class GameView {
                 }
 
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot("d" + count3, true))) {
-                    $("#scene").append("<span id=tile" + count + " class=superEraser>♥</span>");
+                    $("#scene").append("<span id=tile" + count + " class=superEraser>¢</span>");
                     modifsElements(i, j, count);
                     count3++;
                 }
+
+
                 count++;
-
-
-
             }
         }
+        $("#scene").append("<span id=" + PACMAN_ID + ">C</span>");
+        this.updateFrame();
+
 
         /**
         * This function add a tile
@@ -52,5 +54,15 @@ class GameView {
             $("#tile" + count).css("left", 15 * j + "px");
             $("#tile" + count).css("margin-left", "0.1em");
         }
+    }
+
+    /**
+     * this function allows you to refresh the game 
+     */
+    updateFrame(){
+        $("#"+PACMAN_ID).css("position", "absolute");
+        $("#"+PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
+        $("#"+PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
+
     }
 }

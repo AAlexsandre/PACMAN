@@ -1,5 +1,5 @@
 /**
- * a direction is a coordinate from which pacman can move from box to box 
+ * A direction is a coordinate from which pacman can move from box to box 
  */
 class Direction {
     /**

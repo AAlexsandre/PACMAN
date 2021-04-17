@@ -16,7 +16,7 @@ class PacmanView {
                     this._pacmanController.askToChangeDirection(Direction.NORTH);
                     break;
                 case "ArrowDown":
-                     this._pacmanController.askToChangeDirection(Direction.SOUTH);
+                    this._pacmanController.askToChangeDirection(Direction.SOUTH);
                     break;
                 case "ArrowLeft":
                     this._pacmanController.askToChangeDirection(Direction.WEST);

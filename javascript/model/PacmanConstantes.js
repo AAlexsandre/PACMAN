@@ -1,1 +1,2 @@
 PACMAN_ID = "eaterDot";
+RUN_INTERVAL = 300;
