@@ -4,7 +4,7 @@
 class PacmanView {
 
     /**
-     * 
+     * To be created, a PacmanView we just need a pacmanCtrl
      * @param {PacmanCtrl} pacmanController 
      */
     constructor(pacmanController) {

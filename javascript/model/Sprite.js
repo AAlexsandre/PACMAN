@@ -16,6 +16,8 @@ class Sprite extends Component {
 
         this._askedToChangeDirection = false;
         this._askedDirection;
+
+        this._previousPosition;
     }
 
 
@@ -61,5 +63,25 @@ class Sprite extends Component {
      */
     changeDirection() {
         this._direction = this._askedDirection;
+    }
+
+    notifyIsBlocked(){}
+
+
+    _toKnowBeforePosition(direction) {
+        switch (direction) {
+            case Direction.WEST:
+                this._previousPosition = Direction.EAST;
+                break;
+            case Direction.NORTH:
+                this._previousPosition = Direction.SOUTH;
+                break;
+            case Direction.EAST:
+                this._previousPosition = Direction.WEST;
+                break;
+            case Direction.SOUTH:
+                this._previousPosition = Direction.NORTH;
+                break;
+        }
     }
 }

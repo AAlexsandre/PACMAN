@@ -4,7 +4,7 @@
 class PacmanCtrl {
 
     /**
-     * 
+     * To be created, a pacmanCtrl we just need a pacman 
      * @param {Pacman} pacman 
      */
     constructor(pacman) {

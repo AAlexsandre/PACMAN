@@ -14,6 +14,7 @@ class Maze {
         this._layerDot = new Layer(RAW_MAZE.table.length, RAW_MAZE.table[0].length);
 
         this._pacman;
+        this._ghost;
 
         let wallId = 0;
         let dotId = 0;
@@ -38,6 +39,11 @@ class Maze {
 
                 if (RAW_MAZE.table[i][j] == 4) {
                     this._pacman = new Position(i, j);
+                }
+
+                if(RAW_MAZE.table[i][j] == 5){
+                    this._ghost = new Position(i,j);
+
                 }
             }
         }

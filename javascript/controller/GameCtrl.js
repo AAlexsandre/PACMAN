@@ -15,6 +15,9 @@ class GameCtrl {
         
     }
 
+    /**
+     * This function must call the functions at regular intervals of 0.3 seconds
+     */
     run(){
         this._timer = setInterval(() => {
             this._game.moveSprites();

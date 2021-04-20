@@ -3,6 +3,10 @@
  */
 class GameView {
 
+    /**
+     * To be created, a gameView we just need a game
+     * @param {Game} game 
+     */
     constructor(game) {
         this._game = game;
 
@@ -42,6 +46,8 @@ class GameView {
         this.updateFrame();
 
 
+
+
         /**
         * This function add a tile
         * @param {number} i row of array
@@ -59,10 +65,12 @@ class GameView {
     /**
      * this function allows you to refresh the game 
      */
-    updateFrame(){
-        $("#"+PACMAN_ID).css("position", "absolute");
-        $("#"+PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
-        $("#"+PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
+    updateFrame() {
+        $("#" + PACMAN_ID).css("position", "absolute");
+        $("#" + PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
+        $("#" + PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
 
     }
+
+    
 }
