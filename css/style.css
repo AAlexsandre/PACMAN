@@ -49,6 +49,56 @@ main{
     color: darkorange;
 }
 
-#eatDot{
+#eaterDot{
+    border: solid 8px yellow;
+    border-radius: 50%;
+    margin-top: 0.1em;
+}
+
+.ennemy{
+    margin-top: 0.2em;
+    margin-left: 0.1em;
+    height: 8px;
+    width: 8px;
+
+    border-top-left-radius: 70px;
+    border-top-right-radius: 70px;
+}
+
+.ennemy::after{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 5px;
+    width: 5px;
+    border-radius: 100%;
+    left: 1px;
+}
+
+#Blinky{
+    color: red;
+    border: solid;
+    background-color: red;
+}
+
+#Pinky{
+    color: pink;
+    border: solid;
+    background-color: pink;
+}
+
+#Inky{
+    color: lightskyblue;
+    border: solid;
+    background-color: lightskyblue;
+}
+
+#Clyde{
+    color: orange;
+    border: solid;
+    background-color: orange;
+}
+
+.pacmanLifes{
     color: yellow;
 }

@@ -17,7 +17,11 @@ class Sprite extends Component {
         this._askedToChangeDirection = false;
         this._askedDirection;
 
-        this._previousPosition;
+        this._previousPosition = this._position;
+
+        this._isDead = false;
+        this._startPosition = position;
+        this._startDirection = direction;
     }
 
 
@@ -46,6 +50,7 @@ class Sprite extends Component {
      * This function change the position
      */
     move() {
+        this._previousPosition = this._position;
         this._position = this._position.nextPosition(this._direction);
     }
 
@@ -65,23 +70,44 @@ class Sprite extends Component {
         this._direction = this._askedDirection;
     }
 
-    notifyIsBlocked(){}
-
-
-    _toKnowBeforePosition(direction) {
-        switch (direction) {
-            case Direction.WEST:
-                this._previousPosition = Direction.EAST;
-                break;
-            case Direction.NORTH:
-                this._previousPosition = Direction.SOUTH;
-                break;
-            case Direction.EAST:
-                this._previousPosition = Direction.WEST;
-                break;
-            case Direction.SOUTH:
-                this._previousPosition = Direction.NORTH;
-                break;
+    /**
+     * This function change the direction is the ghosts was block by a wall
+     */
+    notifyIsBlocked() {
+        if (this._direction == Direction.WEST){
+            this._direction == Direction.NORTH;
         }
+        if (this._direction == Direction.NORTH){
+            this._direction == Direction.EAST;
+        }
+        if (this._direction == Direction.EAST){
+            this._direction == Direction.SOUTH;
+        }
+        if (this._direction == Direction.SOUTH){
+            this._direction == Direction.WEST;
+        }
+        
+
+    }
+
+    /**
+     * @return {Boolean}
+     */
+    get isDead() { return this._isDead }
+
+    /**
+     * This function change the attributes isDead 
+     */
+    hasBeenEaten() {
+        this._isDead = !this._isDead;
+    }
+
+    /**
+     * This function gives life to the sprite 
+     */
+    respawn() {
+        this._isDead = !this._isDead;
+        this._position = this._startPosition;
+        this._direction = this._startDirection;
     }
 }

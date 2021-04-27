@@ -12,17 +12,30 @@ class GameCtrl {
 
         this._pacmanCtrl = new PacmanCtrl(this._game._pacman);
         this._pacmanView = new PacmanView(this._pacmanCtrl);
-        
+
     }
 
     /**
      * This function must call the functions at regular intervals of 0.3 seconds
      */
-    run(){
+    run() {
         this._timer = setInterval(() => {
-            this._game.moveSprites();
-            this._view.updateFrame();
+            if (!this._game.pacmanHasBeenEaten()) {
+                this._game.moveSprites();
+                this._view.updateFrame();
+
+            } else {
+                console.log("pacman a été manger")
+                this._game.respawn();
+                this._view.updateLives();
+
+                if (this._game.isGameOver()) {
+                    console.log("GAME OVER");
+                    clearInterval(this._timer);
+                }
+            }
         }, RUN_INTERVAL);
     }
+
 
 }

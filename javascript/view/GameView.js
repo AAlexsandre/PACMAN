@@ -41,11 +41,18 @@ class GameView {
 
                 count++;
             }
+
         }
-        $("#scene").append("<span id=" + PACMAN_ID + ">C</span>");
+
+        $("#scene").append("<span id=" + PACMAN_ID + "></span>");
+        $("#scene").append("<span class=ennemy id=" + GHOST_ONE_ID + "></span>");
+        $("#scene").append("<span class=ennemy id=" + GHOST_TWO_ID + "></span>");
+        $("#scene").append("<span class=ennemy id=" + GHOST_THREE_ID + "></span>");
+        $("#scene").append("<span class=ennemy id=" + GHOST_FOUR_ID + "></span>");
+        for (let i = 0; i < this._game._pacman.nbLives; i++) {
+            $("#nbLife").append("<span class = pacmanLifes>☺</span>");
+        }
         this.updateFrame();
-
-
 
 
         /**
@@ -69,8 +76,48 @@ class GameView {
         $("#" + PACMAN_ID).css("position", "absolute");
         $("#" + PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
         $("#" + PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
+        
+        if(this._game._pacman._direction == Direction.NORTH){
+            $("#" + PACMAN_ID).css("border-color", "transparent yellow yellow yellow");
+        }
+        if(this._game._pacman._direction == Direction.EAST){
+            $("#" + PACMAN_ID).css("border-color", "yellow transparent yellow yellow");
+        }
+        if(this._game._pacman._direction == Direction.SOUTH){
+            $("#" + PACMAN_ID).css("border-color", "yellow yellow transparent yellow");
+        }
+        if(this._game._pacman._direction == Direction.WEST){
+            $("#" + PACMAN_ID).css("border-color", "yellow yellow yellow transparent");
+        }
+        this.toSpawGhost();
 
     }
 
-    
+    /**
+     * This function refresh the position of the ghosts
+     */
+    toSpawGhost() {
+        $(".ennemy").css("position", "absolute");
+        $("#" + GHOST_ONE_ID).css("top", 15 * this._game._ghostOne._position._row + "px");
+        $("#" + GHOST_ONE_ID).css("left", 15 * this._game._ghostOne._position._column + "px");
+
+        $("#" + GHOST_TWO_ID).css("top", 15 * this._game._ghostTwo._position._row + "px")
+        $("#" + GHOST_TWO_ID).css("left", 15 * this._game._ghostTwo._position._column + "px")
+
+        $("#" + GHOST_THREE_ID).css("top", 15 * this._game._ghostThree._position._row + "px")
+        $("#" + GHOST_THREE_ID).css("left", 15 * this._game._ghostThree._position._column + "px")
+
+        $("#" + GHOST_FOUR_ID).css("top", 15 * this._game._ghostFour._position._row + "px")
+        $("#" + GHOST_FOUR_ID).css("left", 15 * this._game._ghostFour._position._column + "px")
+
+    }
+
+    /**
+     * This function remove on the view a life point
+     */
+    updateLives() {
+        $(".pacmanLifes:last").remove();
+    }
+
+
 }

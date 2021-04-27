@@ -1,10 +1,10 @@
 /**
- * A component 
+ * A component it's an element of the pacman game
  */
 class Component {
 
     /**
-     * 
+     * To be created, a component we just need an id
      * @param {string} id unique Component
      */
     constructor(id) {
