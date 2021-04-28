@@ -19,30 +19,34 @@ class Maze {
         let wallId = 0;
         let dotId = 0;
 
+        this._nbDots = 0;
+
         for (let i = 0; i < RAW_MAZE.table.length; i++) {
             for (let j = 0; j < RAW_MAZE.table[i].length; j++) {
 
                 if (RAW_MAZE.table[i][j] == 1) {
-                    this._layerWall.setTile(new Position(i, j), new Wall("w" + wallId));
+                    this._layerWall.setTile(new Position(i, j), new Wall(`w${i}_${j}`));
                     wallId++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 2) {
-                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId, false));
+                    this._layerDot.setTile(new Position(i, j), new Dot(`d${i}_${j}`, false));
                     dotId++;
+                    this._nbDots++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 3) {
-                    this._layerDot.setTile(new Position(i, j), new Dot("d" + dotId, true));
+                    this._layerDot.setTile(new Position(i, j), new Dot(`d${i}_${j}`, true));
                     dotId++;
+                    this._nbDots++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 4) {
                     this._pacman = new Position(i, j);
                 }
 
-                if(RAW_MAZE.table[i][j] == 5){
-                    this._ghost = new Position(i,j);
+                if (RAW_MAZE.table[i][j] == 5) {
+                    this._ghost = new Position(i, j);
 
                 }
             }
@@ -102,7 +106,7 @@ class Maze {
     /**
      * @return {Position}
      */
-    get pacman(){ return this._pacman}
+    get pacman() { return this._pacman }
 
     /**
      * This function check if the position is the range of array and it is a wall
@@ -131,7 +135,9 @@ class Maze {
     pick(position) {
         try {
             if (this.canPick(position)) {
-                return this._layerDot._tab[position._row][position._column];
+                let savePosition = this._layerDot.getTile(position);
+                this._layerDot._tab[position._row][position._column] = null;
+                return savePosition;
             }
 
             throw new Error("In this position he has no food for pacman");
@@ -140,8 +146,20 @@ class Maze {
             console.log(error);
         }
 
+    }
 
-
+    /**
+     * This function checks if all dot were eat
+     */
+    isEmpty() {
+        for (let i = 0; i < this._layerDot._tab.length; i++) {
+            for (let j = 0; j < this.layerDot._tab[0].length; j++) {
+                if (this._layerDot._tab[i][j] != null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 }

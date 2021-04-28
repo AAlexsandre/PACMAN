@@ -9,6 +9,8 @@ class Game {
      */
     constructor(rawMaze) {
         this._rawMaze = new Maze(rawMaze);
+        this._scores = 0;
+        this._removedDot;
 
         for (let i = 0; i < RAW_MAZE.table.length; i++) {
             for (let j = 0; j < RAW_MAZE.table[0].length; j++) {
@@ -57,27 +59,27 @@ class Game {
 
         if (this._rawMaze.canWalkOn((this._ghostOne._position).nextPosition(this._ghostOne._direction))) {
             this._ghostOne.move();
-        } else{
+        } else {
             this._ghostOne.notifyIsBlocked();
         }
 
         if (this._ghostOne._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostOne._position).nextPosition(this._ghostOne._askedDirection)))) {
             this._ghostOne.changeDirection();
-        } 
+        }
 
-        
+
         if (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._direction))) {
             this._ghostTwo.move();
-        }  else{
+        } else {
             this._ghostOne.notifyIsBlocked();
         }
 
         if (this._ghostTwo._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._askedDirection)))) {
-            this._ghostTwo.changeDirection(); 
+            this._ghostTwo.changeDirection();
         }
         if (this._rawMaze.canWalkOn((this._ghostThree._position).nextPosition(this._ghostThree._direction))) {
-            this._ghostThree.move();  
-        }  else{
+            this._ghostThree.move();
+        } else {
             this._ghostOne.notifyIsBlocked();
         }
 
@@ -88,16 +90,28 @@ class Game {
         if (this._rawMaze.canWalkOn((this._ghostFour._position).nextPosition(this._ghostFour._direction))) {
             this._ghostFour.move();
 
-        }  else{
+        } else {
             this._ghostOne.notifyIsBlocked();
         }
 
         if (this._ghostFour._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostFour._position).nextPosition(this._ghostFour._askedDirection)))) {
             this._ghostFour.changeDirection();
-            
+
         }
-        
-        
+        if (this._rawMaze.canPick(this._pacman._position)) {
+            if (this._rawMaze._layerDot.hasTile(this._pacman._position)) {
+                if (this._rawMaze._layerDot._tab[this._pacman._position._row][this._pacman._position._column]._isEnergizer) {
+                    this._scores += 100;
+                    this._removedDot = this._rawMaze.pick(this._pacman._position);
+                } else {
+                    this._scores += 10;
+                    this._removedDot = this._rawMaze.pick(this._pacman._position);
+                }
+            }
+        }
+
+
+
     }
 
     /**

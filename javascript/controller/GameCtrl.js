@@ -23,6 +23,9 @@ class GameCtrl {
             if (!this._game.pacmanHasBeenEaten()) {
                 this._game.moveSprites();
                 this._view.updateFrame();
+                if(this._game._rawMaze.isEmpty()){
+                    clearInterval(this._timer);
+                }
 
             } else {
                 console.log("pacman a été manger")
@@ -33,6 +36,7 @@ class GameCtrl {
                     console.log("GAME OVER");
                     clearInterval(this._timer);
                 }
+                
             }
         }, RUN_INTERVAL);
     }
