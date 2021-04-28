@@ -19,6 +19,8 @@ class GameCtrl {
      * This function must call the functions at regular intervals of 0.3 seconds
      */
     run() {
+        this._game.saveScore();
+        this._view.displayGameOver();
         this._timer = setInterval(() => {
             if (!this._game.pacmanHasBeenEaten()) {
                 this._game.moveSprites();
@@ -34,6 +36,8 @@ class GameCtrl {
 
                 if (this._game.isGameOver()) {
                     console.log("GAME OVER");
+                    this._game.saveScore();
+                    this._view.displayGameOver();
                     clearInterval(this._timer);
                 }
                 

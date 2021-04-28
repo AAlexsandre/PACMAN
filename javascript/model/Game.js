@@ -11,6 +11,7 @@ class Game {
         this._rawMaze = new Maze(rawMaze);
         this._scores = 0;
         this._removedDot;
+        this._highScore;
 
         for (let i = 0; i < RAW_MAZE.table.length; i++) {
             for (let j = 0; j < RAW_MAZE.table[0].length; j++) {
@@ -109,9 +110,6 @@ class Game {
                 }
             }
         }
-
-
-
     }
 
     /**
@@ -156,6 +154,25 @@ class Game {
         this.ghostTwo.respawn();
         this.ghostThree.respawn();
         this.ghostFour.respawn();
+    }
+
+    /**
+     * @return {number}
+     */
+    get highScore() { return this._highScore }
+
+    saveScore() {
+        this._highScore = localStorage.getItem("highScore");
+        if(!this._highScore){
+            this._highScore = 0;
+        }
+
+        localStorage.setItem("highScore", this._highScore);
+
+        if(this._highScore < this._scores){
+            this._highScore = this._scores;
+            localStorage.highScore = this._highScore;
+        }
     }
 }
 
