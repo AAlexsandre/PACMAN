@@ -99,14 +99,14 @@ class Sprite extends Component {
      * This function change the attributes isDead 
      */
     hasBeenEaten() {
-        this._isDead = !this._isDead;
+        this._isDead = true;
     }
 
     /**
      * This function gives life to the sprite 
      */
     respawn() {
-        this._isDead = !this._isDead;
+        this._isDead = false;
         this._position = this._startPosition;
         this._direction = this._startDirection;
     }

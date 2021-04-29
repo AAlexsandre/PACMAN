@@ -25,8 +25,9 @@ class GameCtrl {
             if (!this._game.pacmanHasBeenEaten()) {
                 this._game.moveSprites();
                 this._view.updateFrame();
-                if(this._game._rawMaze.isEmpty()){
-                    clearInterval(this._timer);
+                if(this._game.lvlSucceed()){
+                    this._game.nextLevel();
+                    this._view.nextLevel();
                 }
 
             } else {

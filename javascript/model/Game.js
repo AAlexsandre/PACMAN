@@ -174,5 +174,20 @@ class Game {
             localStorage.highScore = this._highScore;
         }
     }
+
+    /**
+     * This function allows to know if the level is complete
+     */
+    lvlSucceed(){
+        return this._rawMaze.isEmpty();
+    }
+
+    /**
+     * This function allows to create a new maze
+     */
+    nextLevel(){
+        this._rawMaze  = new Maze(RAW_MAZE);
+        this.respawn();
+    }
 }
 

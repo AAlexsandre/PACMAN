@@ -20,6 +20,7 @@ class GameView {
                     $(`#w${i}_${j}`).css("top", 15 * i + "px");
                     $(`#w${i}_${j}`).css("left", 15 * j + "px");
                     $(`#w${i}_${j}`).css("margin-left", "0.1em");
+
                 }
 
 
@@ -37,6 +38,7 @@ class GameView {
                     $(`#d${i}_${j}`).css("top", 15 * i + "px");
                     $(`#d${i}_${j}`).css("left", 15 * j + "px");
                     $(`#d${i}_${j}`).css("margin-left", "0.1em");
+
                 }
             }
 
@@ -116,8 +118,20 @@ class GameView {
      * This function display the highscore
      */
     displayGameOver() {
-        console.log(this._game._highScore);
         $("#highScore").text("HIGHSCORES : " + this._game._highScore);
+    }
+
+    nextLevel(){
+        let nextLevel = this._game;
+
+        $("#scene .wall").remove()
+        $("#scene .eraser").remove()
+        $("#scene .superEraser").remove()
+        $("#scene #eaterDot").remove()
+        $("#scene .ennemy").remove()
+        $("#nbLife .pacmanLifes").remove();
+
+        let viewNextLevel = new GameView(nextLevel);
     }
 
 

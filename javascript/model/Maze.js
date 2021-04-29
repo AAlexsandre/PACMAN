@@ -16,9 +16,6 @@ class Maze {
         this._pacman;
         this._ghost;
 
-        let wallId = 0;
-        let dotId = 0;
-
         this._nbDots = 0;
 
         for (let i = 0; i < RAW_MAZE.table.length; i++) {
@@ -26,18 +23,15 @@ class Maze {
 
                 if (RAW_MAZE.table[i][j] == 1) {
                     this._layerWall.setTile(new Position(i, j), new Wall(`w${i}_${j}`));
-                    wallId++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 2) {
                     this._layerDot.setTile(new Position(i, j), new Dot(`d${i}_${j}`, false));
-                    dotId++;
                     this._nbDots++;
                 }
 
                 if (RAW_MAZE.table[i][j] == 3) {
                     this._layerDot.setTile(new Position(i, j), new Dot(`d${i}_${j}`, true));
-                    dotId++;
                     this._nbDots++;
                 }
 

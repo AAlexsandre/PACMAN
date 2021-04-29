@@ -1,5 +1,5 @@
 const PACMAN_ID = "eaterDot";
-RUN_INTERVAL = 300;
+RUN_INTERVAL = 100;
 
 const GHOST_ONE_ID = "Blinky";
 const GHOST_TWO_ID = "Pinky";
