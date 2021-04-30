@@ -6,9 +6,11 @@ class GameView {
     /**
      * To be created, a gameView we just need a game
      * @param {Game} game 
+     * @param {GameCtrl} controller
      */
-    constructor(game) {
+    constructor(game, controller) {
         this._game = game;
+        this._controller = controller;
         for (let i = 0; i < game.rawMaze.layerWall.tab.length; i++) {
             for (let j = 0; j < game.rawMaze.layerWall.tab[i].length; j++) {
 
@@ -52,8 +54,12 @@ class GameView {
         for (let i = 0; i < this._game._pacman.nbLives; i++) {
             $("#nbLife").append("<span class = pacmanLifes>☺</span>");
         }
-
-        $("#place").append("<div id=currentScore class=SameThings></div>")
+        this._game.saveScore();
+        this.displayGameOver();
+        $("#place").append("<div id=currentScore class=SameThings></div>");
+        $("#nbLife").append("<button id=start>START</button>");
+        $("#start").click(this._controller.startHasBeenRequested.bind(this._controller));
+        $("#start").click(this.startGame);
         this.updateFrame();
     }
 
@@ -121,6 +127,9 @@ class GameView {
         $("#highScore").text("HIGHSCORES : " + this._game._highScore);
     }
 
+    /**
+     * This function remove all elements from the maze and create a new maze
+     */
     nextLevel(){
         let nextLevel = this._game;
 
@@ -132,6 +141,13 @@ class GameView {
         $("#nbLife .pacmanLifes").remove();
 
         let viewNextLevel = new GameView(nextLevel);
+    }
+
+    /**
+     * This function hide the button start
+     */
+    startGame(){
+        $("#start").hide();
     }
 
 

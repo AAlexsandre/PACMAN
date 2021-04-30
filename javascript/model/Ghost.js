@@ -15,23 +15,11 @@ class Ghost extends Sprite {
     }
 
     /**
-     * This function choose the direction for ghosts
+     * This function call toChangeDirection function
      */
     _choiceNewDirection() {
         this._interval = setInterval(() => {
-            let numberToChangeDirection = Math.floor(Math.random() * 4 + 1);
-                if (numberToChangeDirection == 1) {
-                    this._direction = Direction.WEST;
-                }
-                if (numberToChangeDirection == 2) {
-                    this._direction = Direction.NORTH;
-                }
-                if (numberToChangeDirection == 3) {
-                    this._direction = Direction.EAST;
-                }
-                if (numberToChangeDirection == 4) {
-                    this._direction = Direction.SOUTH;
-                }
+            this.toChangeDirection();
             
         }, 4000);
 
@@ -46,8 +34,25 @@ class Ghost extends Sprite {
         return ((pacman.position.row == this.position.row && pacman.position.column == this.position.column)
             || (this._previousPosition.row == pacman.position.row && this._previousPosition.column == pacman.position.column)
             && (pacman._previousPosition.row == this.position.row && pacman._previousPosition.column == this.position.column));
+    }
 
-
+    /**
+     * This function choose the direction for ghosts
+     */
+    toChangeDirection(){
+        let numberToChangeDirection = Math.floor(Math.random() * 4 + 1);
+        if (numberToChangeDirection == 1) {
+            this._direction = Direction.WEST;
+        }
+        if (numberToChangeDirection == 2) {
+            this._direction = Direction.NORTH;
+        }
+        if (numberToChangeDirection == 3) {
+            this._direction = Direction.EAST;
+        }
+        if (numberToChangeDirection == 4) {
+            this._direction = Direction.SOUTH;
+        }
     }
 
     /**

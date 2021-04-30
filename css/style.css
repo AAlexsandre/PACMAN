@@ -102,3 +102,16 @@ main{
 .pacmanLifes{
     color: yellow;
 }
+
+#start{
+    margin-left: 160px;
+    background-color: yellow;
+    border : solid yellow;
+    border-radius: 1em;
+    font-size: 0.7em;
+}
+
+#start:hover{
+    background-color: green;
+    border : solid green;
+}

@@ -72,7 +72,7 @@ class Game {
         if (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._direction))) {
             this._ghostTwo.move();
         } else {
-            this._ghostOne.notifyIsBlocked();
+            this._ghostTwo.notifyIsBlocked();
         }
 
         if (this._ghostTwo._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._askedDirection)))) {
@@ -81,7 +81,7 @@ class Game {
         if (this._rawMaze.canWalkOn((this._ghostThree._position).nextPosition(this._ghostThree._direction))) {
             this._ghostThree.move();
         } else {
-            this._ghostOne.notifyIsBlocked();
+            this._ghostThree.notifyIsBlocked();
         }
 
         if (this._ghostThree._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostThree._position).nextPosition(this._ghostThree._askedDirection)))) {
@@ -92,7 +92,7 @@ class Game {
             this._ghostFour.move();
 
         } else {
-            this._ghostOne.notifyIsBlocked();
+            this._ghostFour.notifyIsBlocked();
         }
 
         if (this._ghostFour._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostFour._position).nextPosition(this._ghostFour._askedDirection)))) {

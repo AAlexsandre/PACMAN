@@ -74,20 +74,7 @@ class Sprite extends Component {
      * This function change the direction is the ghosts was block by a wall
      */
     notifyIsBlocked() {
-        if (this._direction == Direction.WEST){
-            this._direction == Direction.NORTH;
-        }
-        if (this._direction == Direction.NORTH){
-            this._direction == Direction.EAST;
-        }
-        if (this._direction == Direction.EAST){
-            this._direction == Direction.SOUTH;
-        }
-        if (this._direction == Direction.SOUTH){
-            this._direction == Direction.WEST;
-        }
-        
-
+        this.toChangeDirection();
     }
 
     /**

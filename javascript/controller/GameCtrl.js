@@ -8,12 +8,12 @@ class GameCtrl {
      */
     constructor() {
         this._game = new Game(RAW_MAZE);
-        this._view = new GameView(this._game);
+        this._view = new GameView(this._game,this);
 
         this._pacmanCtrl = new PacmanCtrl(this._game._pacman);
-        this._pacmanView = new PacmanView(this._pacmanCtrl);
-
+        this._pacmanView = new PacmanView(this._pacmanCtrl, this._view._start);
     }
+    
 
     /**
      * This function must call the functions at regular intervals of 0.3 seconds
@@ -44,6 +44,12 @@ class GameCtrl {
                 
             }
         }, RUN_INTERVAL);
+    }
+
+    startHasBeenRequested(){
+        console.log(this);
+        
+        this.run();
     }
 
 
