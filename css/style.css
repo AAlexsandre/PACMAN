@@ -54,12 +54,38 @@ main{
     font-size: 0.7em
 }
 
-#eaterDot{
+#pacmanMouthTop{
+    margin-top: 0.2em;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
     border: solid 8px yellow;
     border-radius: 50%;
-    margin-top: 0.1em;
-
+    animation: topMouth 0.3s ease-out infinite;
 }
+
+#pacmanMouthBottom{
+    margin-top: 0.2em;
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    border: solid 8px yellow;
+    border-radius: 50%;
+    animation: bottomMouth 0.3s ease-out infinite;
+}
+
+@keyframes topMouth{
+    from { rotate: 50deg;}
+    to { rotate: -50deg;}
+}
+
+@keyframes bottomMouth{
+    from { rotate: -50deg;}
+    to { rotate: 50deg;}
+}
+
 
 .ennemy{
     margin-top: 0.2em;
@@ -71,14 +97,24 @@ main{
     border-top-right-radius: 70px;
 }
 
+.ennemy::before{
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 6px;
+    width: 5px;
+    border-radius: 50%;
+    left: -2px;
+}
+
 .ennemy::after{
     content: "";
     position: absolute;
     background-color: white;
-    height: 5px;
+    height: 6px;
     width: 5px;
-    border-radius: 100%;
-    left: 1px;
+    border-radius: 50%;
+    left: 4px;
 }
 
 #Blinky{

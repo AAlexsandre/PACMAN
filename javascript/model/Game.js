@@ -57,6 +57,15 @@ class Game {
             if (this._ghosts[index]._askedDirection != null && (this._rawMaze.canWalkOn((this._ghosts[index]._position).nextPosition(this._ghosts[index]._askedDirection)))) {
                 this._ghosts[index].changeDirection();
             }
+            if (this._ghosts[index]._position._row == 14 && this._ghosts[index]._position._column == 0 && this._ghosts[index]._direction == Direction.WEST) {
+                this._ghosts[index]._position = new Position(14, 27);
+            }
+    
+            
+            if (this._ghosts[index]._position._row == 14 && this._ghosts[index]._position._column == 27 && this._ghosts[index]._direction == Direction.EAST) {
+                this._ghosts[index]._position = new Position(14, 0);
+                
+            }
         }
 
         if (this._rawMaze.canWalkOn((this._pacman._position).nextPosition(this._pacman._direction))) {

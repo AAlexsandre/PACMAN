@@ -53,14 +53,13 @@ class GameView {
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot(`d${i}_${j}`, true))) {
                     $("#scene").append(`<div id=d${i}_${j} class=superEraser>🥩</div>`);
                     this.LaysOutThePosition(i, j);
-
-
                 }
             }
-
         }
 
         $("#scene").append("<div id=" + PACMAN_ID + "></div>");
+        $("#" + PACMAN_ID).before("<span id=pacmanMouthTop></span>");
+        $("#" + PACMAN_ID).after("<span id=pacmanMouthBottom></span>");
 
         for (let index = 0; index < this._game._ghosts.length; index++) {
             $("#scene").append("<div class=ennemy id=" + this._game._ghosts[index]._id + "></div>");
@@ -97,21 +96,30 @@ class GameView {
         $("#"+ PACMAN_ID).css("position","absolute");
         $("#" + PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
         $("#" + PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
+        $("#pacmanMouthTop").css("top", 15 * this._game._pacman._position._row + "px");
+        $("#pacmanMouthTop").css("left", 15 * this._game._pacman._position._column + "px");
+        $("#pacmanMouthBottom").css("top", 15 * this._game._pacman._position._row + "px");
+        $("#pacmanMouthBottom").css("left", 15 * this._game._pacman._position._column + "px");
 
         
         if (this._game._pacman._direction == Direction.NORTH) {
-            $("#" + PACMAN_ID).css("border-color", "transparent yellow yellow yellow");
+            $("#pacmanMouthTop").css("border-color", "transparent yellow yellow yellow");
+            $("#pacmanMouthBottom").css("border-color", "transparent yellow yellow yellow");
+ 
         }
         if (this._game._pacman._direction == Direction.EAST) {
-            $("#" + PACMAN_ID).css("border-color", "yellow transparent yellow yellow");
+            $("#pacmanMouthTop").css("border-color", "yellow transparent yellow yellow");
+            $("#pacmanMouthBottom").css("border-color", "yellow transparent yellow yellow");
         }
         if (this._game._pacman._direction == Direction.SOUTH) {
-            $("#" + PACMAN_ID).css("border-color", "yellow yellow transparent yellow");
+            $("#pacmanMouthTop").css("border-color", "yellow yellow transparent yellow");
+            $("#pacmanMouthBottom").css("border-color", "yellow yellow transparent yellow");
         }
         if (this._game._pacman._direction == Direction.WEST) {
-            $("#" + PACMAN_ID).css("border-color", "yellow yellow yellow transparent");
+            $("#pacmanMouthTop").css("border-color", "yellow yellow yellow transparent");
+            $("#pacmanMouthBottom").css("border-color", "yellow yellow yellow transparent");
         }
-        
+
         
 
         if (this._game._removedDot != null) {
@@ -150,6 +158,8 @@ class GameView {
     displayGameOver() {
         $("#highScore").text("HIGHSCORES : " + this._game._highScore);
         if (this._game.isGameOver()) {
+            $("#pacmanMouthTop").remove();
+            $("#pacmanMouthBottom").remove();
             $("#scene").append("<div id=gameOver>GAME OVER</div>");
             $("#scene").append("<button id=restart class=button>RESTART</button>");
             this.removeAll();
