@@ -19,19 +19,19 @@ class GameView {
                 if (JSON.stringify(game.rawMaze.layerWall.tab[i][j]) === JSON.stringify(new Wall(`w${i}_${j}`))) {
                     switch (wallAppearance) {
                         case 1:
-                            $("#scene").append(`<span id=w${i}_${j} class=wall>■</span>`);
+                            $("#scene").append(`<div id=w${i}_${j} class=wall>■</div>`);
                             break;
                         case 2:
-                            $("#scene").append(`<span id=w${i}_${j} class=wall>♥</span>`);
+                            $("#scene").append(`<div id=w${i}_${j} class=wall>♥</div>`);
                             break;
                         case 3:
-                            $("#scene").append(`<span id=w${i}_${j} class=wall>♦</span>`);
+                            $("#scene").append(`<div id=w${i}_${j} class=wall>♦</div>`);
                             break;
                         case 4:
-                            $("#scene").append(`<span id=w${i}_${j} class=wall>♣</span>`);
+                            $("#scene").append(`<div id=w${i}_${j} class=wall>♣</div>`);
                             break;
                         case 5:
-                            $("#scene").append(`<span id=w${i}_${j} class=wall>♠</span>`);
+                            $("#scene").append(`<div id=w${i}_${j} class=wall>♠</div>`);
                             break;
 
 
@@ -45,13 +45,13 @@ class GameView {
 
 
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot(`d${i}_${j}`, false))) {
-                    $("#scene").append(`<span id=d${i}_${j} class=eraser>🍕</span>`);
+                    $("#scene").append(`<div id=d${i}_${j} class=eraser>🍕</div>`);
                     this.LaysOutThePosition(i, j)
 
                 }
 
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot(`d${i}_${j}`, true))) {
-                    $("#scene").append(`<span id=d${i}_${j} class=superEraser>🥩</span>`);
+                    $("#scene").append(`<div id=d${i}_${j} class=superEraser>🥩</div>`);
                     this.LaysOutThePosition(i, j);
 
 
@@ -60,14 +60,14 @@ class GameView {
 
         }
 
-        $("#scene").append("<span id=" + PACMAN_ID + "></span>");
+        $("#scene").append("<div id=" + PACMAN_ID + "></div>");
 
         for (let index = 0; index < this._game._ghosts.length; index++) {
-            $("#scene").append("<span class=ennemy id=" + this._game._ghosts[index]._id + "></span>");
+            $("#scene").append("<div class=ennemy id=" + this._game._ghosts[index]._id + "></div>");
         }
 
         for (let i = 0; i < this._game._pacman.nbLives; i++) {
-            $("#nbLife").append("<span class = pacmanLifes>😀</span>");
+            $("#nbLife").append("<div class = pacmanLifes>😀</div>");
         }
         this._game.saveScore();
         this.displayGameOver();
@@ -94,10 +94,11 @@ class GameView {
      * this function allows you to refresh the game 
      */
     updateFrame() {
-        $("#" + PACMAN_ID).css("position", "absolute");
+        $("#"+ PACMAN_ID).css("position","absolute");
         $("#" + PACMAN_ID).css("top", 15 * this._game._pacman._position._row + "px");
         $("#" + PACMAN_ID).css("left", 15 * this._game._pacman._position._column + "px");
 
+        
         if (this._game._pacman._direction == Direction.NORTH) {
             $("#" + PACMAN_ID).css("border-color", "transparent yellow yellow yellow");
         }
@@ -110,6 +111,8 @@ class GameView {
         if (this._game._pacman._direction == Direction.WEST) {
             $("#" + PACMAN_ID).css("border-color", "yellow yellow yellow transparent");
         }
+        
+        
 
         if (this._game._removedDot != null) {
             if (this._game._pacman._position != this._game.rawMaze.layerDot.tab[this._game._pacman._position.row][this._game._pacman._position.column]) {

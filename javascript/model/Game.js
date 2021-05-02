@@ -53,18 +53,32 @@ class Game {
             } else {
                 this._ghosts[index].notifyIsBlocked();
             }
-    
+
             if (this._ghosts[index]._askedDirection != null && (this._rawMaze.canWalkOn((this._ghosts[index]._position).nextPosition(this._ghosts[index]._askedDirection)))) {
                 this._ghosts[index].changeDirection();
-            }   
+            }
         }
-        
+
         if (this._rawMaze.canWalkOn((this._pacman._position).nextPosition(this._pacman._direction))) {
             this._pacman.move();
         }
+
         if (this._pacman._askedDirection != null && (this._rawMaze.canWalkOn((this._pacman._position).nextPosition(this._pacman._askedDirection)))) {
             this._pacman.changeDirection();
         }
+
+        if (this._pacman._position._row == 14 && this._pacman._position._column == 0 && this._pacman._direction == Direction.WEST) {
+            this._pacman._position = new Position(14, 27);
+        }
+
+        
+        if (this._pacman._position._row == 14 && this._pacman._position._column == 27 && this._pacman._direction == Direction.EAST) {
+            this.pacman._position = new Position(14, 0);
+            
+        }
+
+
+
 
         if (this._rawMaze.canPick(this._pacman._position)) {
             if (this._rawMaze._layerDot.hasTile(this._pacman._position)) {
@@ -120,13 +134,13 @@ class Game {
 
     saveScore() {
         this._highScore = localStorage.getItem("highScore");
-        if(!this._highScore){
+        if (!this._highScore) {
             this._highScore = 0;
         }
 
         localStorage.setItem("highScore", this._highScore);
 
-        if(this._highScore < this._scores){
+        if (this._highScore < this._scores) {
             this._highScore = this._scores;
             localStorage.highScore = this._highScore;
         }
@@ -135,15 +149,15 @@ class Game {
     /**
      * This function allows to know if the level is complete
      */
-    lvlSucceed(){
+    lvlSucceed() {
         return this._rawMaze.isEmpty();
     }
 
     /**
      * This function allows to create a new maze
      */
-    nextLevel(){
-        this._rawMaze  = new Maze(RAW_MAZE);
+    nextLevel() {
+        this._rawMaze = new Maze(RAW_MAZE);
         this.respawn();
     }
 }
