@@ -12,6 +12,7 @@ class Game {
         this._scores = 0;
         this._removedDot;
         this._highScore;
+        this._ghosts = new Array();
 
         for (let i = 0; i < RAW_MAZE.table.length; i++) {
             for (let j = 0; j < RAW_MAZE.table[0].length; j++) {
@@ -20,11 +21,10 @@ class Game {
                 }
 
                 if (RAW_MAZE.table[i][j] == 5) {
-                    this._ghostOne = new Ghost(new Position(i, j), Direction.WEST, GHOST_ONE_ID);
-                    this._ghostTwo = new Ghost(new Position(i, j), Direction.NORTH, GHOST_TWO_ID);
-                    this._ghostThree = new Ghost(new Position(i, j), Direction.EAST, GHOST_THREE_ID);
-                    this._ghostFour = new Ghost(new Position(i, j), Direction.WEST, GHOST_FOUR_ID);
-
+                    this._ghosts.push(this._ghostOne = new Ghost(new Position(i, j), Direction.WEST, GHOST_ONE_ID));
+                    this._ghosts.push(this._ghostTwo = new Ghost(new Position(i, j), Direction.NORTH, GHOST_TWO_ID));
+                    this._ghosts.push(this._ghostThree = new Ghost(new Position(i, j), Direction.EAST, GHOST_THREE_ID));
+                    this._ghosts.push(this._ghostFour = new Ghost(new Position(i, j), Direction.WEST, GHOST_FOUR_ID));
                 }
             }
         }
@@ -41,16 +41,24 @@ class Game {
      */
     get pacman() { return this._pacman }
 
-    get ghostOne() { return this._ghostOne }
-    get ghostTwo() { return this._ghostTwo }
-    get ghostThree() { return this._ghostThree }
-    get ghostFour() { return this._ghostFour }
-
 
     /**
      * This function will move the pacman
      */
     moveSprites() {
+        for (let index = 0; index < this._ghosts.length; index++) {
+            if (this._rawMaze.canWalkOn((this._ghosts[index]._position).nextPosition(this._ghosts[index]._direction))) {
+                this._ghosts[index].move();
+
+            } else {
+                this._ghosts[index].notifyIsBlocked();
+            }
+    
+            if (this._ghosts[index]._askedDirection != null && (this._rawMaze.canWalkOn((this._ghosts[index]._position).nextPosition(this._ghosts[index]._askedDirection)))) {
+                this._ghosts[index].changeDirection();
+            }   
+        }
+        
         if (this._rawMaze.canWalkOn((this._pacman._position).nextPosition(this._pacman._direction))) {
             this._pacman.move();
         }
@@ -58,47 +66,6 @@ class Game {
             this._pacman.changeDirection();
         }
 
-        if (this._rawMaze.canWalkOn((this._ghostOne._position).nextPosition(this._ghostOne._direction))) {
-            this._ghostOne.move();
-        } else {
-            this._ghostOne.notifyIsBlocked();
-        }
-
-        if (this._ghostOne._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostOne._position).nextPosition(this._ghostOne._askedDirection)))) {
-            this._ghostOne.changeDirection();
-        }
-
-
-        if (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._direction))) {
-            this._ghostTwo.move();
-        } else {
-            this._ghostTwo.notifyIsBlocked();
-        }
-
-        if (this._ghostTwo._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostTwo._position).nextPosition(this._ghostTwo._askedDirection)))) {
-            this._ghostTwo.changeDirection();
-        }
-        if (this._rawMaze.canWalkOn((this._ghostThree._position).nextPosition(this._ghostThree._direction))) {
-            this._ghostThree.move();
-        } else {
-            this._ghostThree.notifyIsBlocked();
-        }
-
-        if (this._ghostThree._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostThree._position).nextPosition(this._ghostThree._askedDirection)))) {
-            this._ghostThree.changeDirection();
-        }
-
-        if (this._rawMaze.canWalkOn((this._ghostFour._position).nextPosition(this._ghostFour._direction))) {
-            this._ghostFour.move();
-
-        } else {
-            this._ghostFour.notifyIsBlocked();
-        }
-
-        if (this._ghostFour._askedDirection != null && (this._rawMaze.canWalkOn((this._ghostFour._position).nextPosition(this._ghostFour._askedDirection)))) {
-            this._ghostFour.changeDirection();
-
-        }
         if (this._rawMaze.canPick(this._pacman._position)) {
             if (this._rawMaze._layerDot.hasTile(this._pacman._position)) {
                 if (this._rawMaze._layerDot._tab[this._pacman._position._row][this._pacman._position._column]._isEnergizer) {
@@ -125,21 +92,11 @@ class Game {
      * @return {Boolean}
      */
     pacmanHasBeenEaten() {
-        if (this._ghostOne.canEat(this._pacman)) {
-            this._pacman.hasBeenEaten();
-            return this._pacman._isDead;
-        }
-        if (this._ghostTwo.canEat(this._pacman)) {
-            this._pacman.hasBeenEaten();
-            return this._pacman._isDead;
-        }
-        if (this._ghostThree.canEat(this._pacman)) {
-            this._pacman.hasBeenEaten();
-            return this._pacman._isDead;
-        }
-        if (this._ghostFour.canEat(this._pacman)) {
-            this._pacman.hasBeenEaten();
-            return this._pacman._isDead;
+        for (let index = 0; index < this._ghosts.length; index++) {
+            if (this._ghosts[index].canEat(this._pacman)) {
+                this._pacman.hasBeenEaten();
+                return this._pacman._isDead;
+            }
         }
     }
 
@@ -150,10 +107,10 @@ class Game {
         this.pacman.respawn();
         this.pacman._askedDirection = Direction.WEST;
 
-        this.ghostOne.respawn();
-        this.ghostTwo.respawn();
-        this.ghostThree.respawn();
-        this.ghostFour.respawn();
+        for (let index = 0; index < this._ghosts.length; index++) {
+            this._ghosts[index].respawn();
+        }
+
     }
 
     /**

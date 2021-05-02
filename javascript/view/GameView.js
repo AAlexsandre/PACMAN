@@ -11,13 +11,31 @@ class GameView {
     constructor(game, controller) {
         this._game = game;
         this._controller = controller;
+        let wallAppearance = Math.floor(Math.random() * 5 + 1);
         for (let i = 0; i < game.rawMaze.layerWall.tab.length; i++) {
             for (let j = 0; j < game.rawMaze.layerWall.tab[i].length; j++) {
 
 
-
                 if (JSON.stringify(game.rawMaze.layerWall.tab[i][j]) === JSON.stringify(new Wall(`w${i}_${j}`))) {
-                    $("#scene").append(`<span id=w${i}_${j} class=wall>■</span>`);
+                    switch (wallAppearance) {
+                        case 1:
+                            $("#scene").append(`<span id=w${i}_${j} class=wall>■</span>`);
+                            break;
+                        case 2:
+                            $("#scene").append(`<span id=w${i}_${j} class=wall>♥</span>`);
+                            break;
+                        case 3:
+                            $("#scene").append(`<span id=w${i}_${j} class=wall>♦</span>`);
+                            break;
+                        case 4:
+                            $("#scene").append(`<span id=w${i}_${j} class=wall>♣</span>`);
+                            break;
+                        case 5:
+                            $("#scene").append(`<span id=w${i}_${j} class=wall>♠</span>`);
+                            break;
+
+
+                    }
                     $(`#w${i}_${j}`).css("position", "absolute");
                     $(`#w${i}_${j}`).css("top", 15 * i + "px");
                     $(`#w${i}_${j}`).css("left", 15 * j + "px");
@@ -27,19 +45,15 @@ class GameView {
 
 
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot(`d${i}_${j}`, false))) {
-                    $("#scene").append(`<span id=d${i}_${j} class=eraser>©</span>`);
-                    $(`#d${i}_${j}`).css("position", "absolute");
-                    $(`#d${i}_${j}`).css("top", 15 * i + "px");
-                    $(`#d${i}_${j}`).css("left", 15 * j + "px");
-                    $(`#d${i}_${j}`).css("margin-left", "0.1em");
+                    $("#scene").append(`<span id=d${i}_${j} class=eraser>🍕</span>`);
+                    this.LaysOutThePosition(i, j)
+
                 }
 
                 if (JSON.stringify(game.rawMaze.layerDot.tab[i][j]) === JSON.stringify(new Dot(`d${i}_${j}`, true))) {
-                    $("#scene").append(`<span id=d${i}_${j} class=superEraser>©</span>`);
-                    $(`#d${i}_${j}`).css("position", "absolute");
-                    $(`#d${i}_${j}`).css("top", 15 * i + "px");
-                    $(`#d${i}_${j}`).css("left", 15 * j + "px");
-                    $(`#d${i}_${j}`).css("margin-left", "0.1em");
+                    $("#scene").append(`<span id=d${i}_${j} class=superEraser>🥩</span>`);
+                    this.LaysOutThePosition(i, j);
+
 
                 }
             }
@@ -47,20 +61,33 @@ class GameView {
         }
 
         $("#scene").append("<span id=" + PACMAN_ID + "></span>");
-        $("#scene").append("<span class=ennemy id=" + GHOST_ONE_ID + "></span>");
-        $("#scene").append("<span class=ennemy id=" + GHOST_TWO_ID + "></span>");
-        $("#scene").append("<span class=ennemy id=" + GHOST_THREE_ID + "></span>");
-        $("#scene").append("<span class=ennemy id=" + GHOST_FOUR_ID + "></span>");
+
+        for (let index = 0; index < this._game._ghosts.length; index++) {
+            $("#scene").append("<span class=ennemy id=" + this._game._ghosts[index]._id + "></span>");
+        }
+
         for (let i = 0; i < this._game._pacman.nbLives; i++) {
-            $("#nbLife").append("<span class = pacmanLifes>☺</span>");
+            $("#nbLife").append("<span class = pacmanLifes>😀</span>");
         }
         this._game.saveScore();
         this.displayGameOver();
+
         $("#place").append("<div id=currentScore class=SameThings></div>");
-        $("#nbLife").append("<button id=start>START</button>");
-        $("#start").click(this._controller.startHasBeenRequested.bind(this._controller));
-        $("#start").click(this.startGame);
+        this.whenYouClicked();
+
         this.updateFrame();
+    }
+
+    /**
+     * This function lays out the position of the erasers
+     * @param {number} i 
+     * @param {number} j 
+     */
+    LaysOutThePosition(i, j) {
+        $(`#d${i}_${j}`).css("position", "absolute");
+        $(`#d${i}_${j}`).css("top", 15 * i + "px");
+        $(`#d${i}_${j}`).css("left", 15 * j + "px");
+        $(`#d${i}_${j}`).css("margin-left", "0.1em");
     }
 
     /**
@@ -89,27 +116,20 @@ class GameView {
                 $("#" + this._game._removedDot._id).css("color", "transparent");
             }
         }
-        $("#currentScore").text("Score en cours : "+this._game._scores);
-        this.toSpawGhost();
+        $("#currentScore").text("Score en cours : " + this._game._scores);
+        this.toSpawGhostAndChangeDirection();
 
     }
 
     /**
      * This function refresh the position of the ghosts
      */
-    toSpawGhost() {
+    toSpawGhostAndChangeDirection() {
         $(".ennemy").css("position", "absolute");
-        $("#" + GHOST_ONE_ID).css("top", 15 * this._game._ghostOne._position._row + "px");
-        $("#" + GHOST_ONE_ID).css("left", 15 * this._game._ghostOne._position._column + "px");
-
-        $("#" + GHOST_TWO_ID).css("top", 15 * this._game._ghostTwo._position._row + "px")
-        $("#" + GHOST_TWO_ID).css("left", 15 * this._game._ghostTwo._position._column + "px")
-
-        $("#" + GHOST_THREE_ID).css("top", 15 * this._game._ghostThree._position._row + "px")
-        $("#" + GHOST_THREE_ID).css("left", 15 * this._game._ghostThree._position._column + "px")
-
-        $("#" + GHOST_FOUR_ID).css("top", 15 * this._game._ghostFour._position._row + "px")
-        $("#" + GHOST_FOUR_ID).css("left", 15 * this._game._ghostFour._position._column + "px")
+        for (let index = 0; index < this._game._ghosts.length; index++) {
+            $("#" + this._game._ghosts[index]._id).css("top", 15 * this._game._ghosts[index]._position._row + "px");
+            $("#" + this._game._ghosts[index]._id).css("left", 15 * this._game._ghosts[index]._position._column + "px");
+        }
 
     }
 
@@ -118,6 +138,7 @@ class GameView {
      */
     updateLives() {
         $(".pacmanLifes:last").remove();
+        $(".pacmanLifes:last").text("😰");
     }
 
     /**
@@ -125,29 +146,61 @@ class GameView {
      */
     displayGameOver() {
         $("#highScore").text("HIGHSCORES : " + this._game._highScore);
+        if (this._game.isGameOver()) {
+            $("#scene").append("<div id=gameOver>GAME OVER</div>");
+            $("#scene").append("<button id=restart class=button>RESTART</button>");
+            this.removeAll();
+            this.afterGameOver();
+            $("#restart").click(this._controller.startHasBeenRequested.bind(this._controller));
+        }
     }
 
     /**
      * This function remove all elements from the maze and create a new maze
      */
-    nextLevel(){
+    nextLevel() {
         let nextLevel = this._game;
-
-        $("#scene .wall").remove()
-        $("#scene .eraser").remove()
-        $("#scene .superEraser").remove()
-        $("#scene #eaterDot").remove()
-        $("#scene .ennemy").remove()
-        $("#nbLife .pacmanLifes").remove();
-
-        let viewNextLevel = new GameView(nextLevel);
+        this.removeAll();
+        let viewNextLevel = new GameView(nextLevel, this._controller);
     }
 
     /**
      * This function hide the button start
      */
-    startGame(){
+    startGame() {
         $("#start").hide();
+        $("#gameOver").remove();
+        $("#restart").remove();
+    }
+
+    /**
+     * This function removes all elements from the pacman game
+     * wall, dot, superDot, pacman, ghosts and pacman points lifes
+     */
+    removeAll() {
+        $("#scene .wall").remove();
+        $("#scene .eraser").remove();
+        $("#scene .superEraser").remove();
+        $("#scene #eaterDot").remove();
+        $("#scene .ennemy").remove();
+        $("#nbLife .pacmanLifes").remove();
+    }
+
+    /**
+     * This function start the game and calls the startGame function
+     */
+    whenYouClicked() {
+        $("#start").click(this._controller.startHasBeenRequested.bind(this._controller));
+        $("#start").click(this.startGame);
+
+    }
+
+    /**
+     * This function restart the game
+     */
+    afterGameOver() {
+        this._controller = new GameCtrl();
+        $("#restart").click(this.startGame);
     }
 
 

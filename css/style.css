@@ -1,6 +1,6 @@
 body{
     background-color: #D6E3D6;
-    font-family: docktrin;
+    font-family: 'Orbitron', sans-serif;
 }
 
 main{
@@ -23,6 +23,10 @@ main{
     background-color: #5B845B;
 }
 
+#highScore{
+    margin-top: 0.2em;
+}
+
 #nbLife{
     width: 450px;
     height: 20px;
@@ -42,11 +46,12 @@ main{
 }
 
 .eraser{
-    color: lightcyan;
+    font-size: 0.7em;
+    margin-top: 0.2em;
 }
 
 .superEraser{
-    color: darkorange;
+    font-size: 0.7em
 }
 
 #eaterDot{
@@ -100,18 +105,33 @@ main{
 }
 
 .pacmanLifes{
-    color: yellow;
+    font-size: 0.8em;
 }
 
-#start{
-    margin-left: 160px;
+.button{
+    font-family: 'Orbitron', sans-serif;
     background-color: yellow;
     border : solid yellow;
-    border-radius: 1em;
+    border-radius: 0.2em;
     font-size: 0.7em;
 }
+#start{
+    margin-left: 42.2%;
+    margin-top: 50%;
+}
 
-#start:hover{
+#restart{
+    margin-left: 40%;
+}
+
+#start:hover, #restart:hover{
     background-color: green;
     border : solid green;
+}
+
+#gameOver{
+    font-size: 0.7em;
+    margin-top: 48%;
+    margin-left: 40.5%;
+    color: red;
 }

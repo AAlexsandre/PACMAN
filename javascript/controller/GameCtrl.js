@@ -31,12 +31,10 @@ class GameCtrl {
                 }
 
             } else {
-                console.log("pacman a été manger")
                 this._game.respawn();
                 this._view.updateLives();
 
                 if (this._game.isGameOver()) {
-                    console.log("GAME OVER");
                     this._game.saveScore();
                     this._view.displayGameOver();
                     clearInterval(this._timer);
@@ -46,9 +44,10 @@ class GameCtrl {
         }, RUN_INTERVAL);
     }
 
+    /**
+     * This function calls the function run()
+     */
     startHasBeenRequested(){
-        console.log(this);
-        
         this.run();
     }
 
