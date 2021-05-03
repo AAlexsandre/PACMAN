@@ -63,6 +63,7 @@ class GameView {
 
         for (let index = 0; index < this._game._ghosts.length; index++) {
             $("#scene").append("<div class=ennemy id=" + this._game._ghosts[index]._id + "></div>");
+            $("#"+this._game._ghosts[index]._id).append("<div class=low></div>");
         }
 
         for (let i = 0; i < this._game._pacman.nbLives; i++) {

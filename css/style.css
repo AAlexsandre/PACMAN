@@ -117,6 +117,29 @@ main{
     left: 4px;
 }
 
+.low,.low::before,.low::after{
+    position :absolute;
+    height: 0;
+    width: 0;
+    border: solid 3px #5B845B;
+    border-top-color: transparent;
+    bottom: -5px;
+    left: -4px;
+}
+
+.low::before{
+    content:"";
+    left: 2.6px;
+    bottom: -3px;
+}
+
+.low::after{
+    content:"";
+    left: 8.5px;
+    bottom: -3px;
+}
+
+
 #Blinky{
     color: red;
     border: solid;
