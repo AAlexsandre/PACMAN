@@ -174,6 +174,8 @@ class GameView {
      */
     nextLevel() {
         let nextLevel = this._game;
+        $("#pacmanMouthTop").remove();
+        $("#pacmanMouthBottom").remove();
         this.removeAll();
         let viewNextLevel = new GameView(nextLevel, this._controller);
     }
