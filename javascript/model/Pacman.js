@@ -4,7 +4,7 @@
 class Pacman extends Sprite {
 
     /**
-     * 
+     * To created a Pacman we just need a position and direction
      * @param {Position}  position the initial position
      * @param {Direction} direction the initial direction
      */

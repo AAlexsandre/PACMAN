@@ -42,6 +42,7 @@ class Layer {
     /**
      * This function put a tile in the position of array
      * @param {Position} pos Position
+     * @param {Tile} tile Tile
      */
     setTile(pos, tile) {
         this._tab[pos._row][pos._column] = tile;

@@ -14,5 +14,5 @@ class Component {
     /**
      * @returns {string}
      */
-    get id() { return this_id; }
+    get id() { return this._id; }
 }

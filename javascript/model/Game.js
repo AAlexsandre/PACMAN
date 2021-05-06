@@ -107,7 +107,7 @@ class Game {
      * @return {Boolean}
      */
     isGameOver() {
-        return this.pacman.nbLives == 0;
+        return this._pacman._nbLives == 0;
     }
 
     /**
